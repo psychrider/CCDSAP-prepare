@@ -97,19 +97,6 @@ void factor(int n,vector<int> &v)
     }  
 }
 
-void dfs(vector<int> v[],int i,int mark[],set<int> &st,vector<int> b,vector<int> &id)
-{
-    mark[i]=1;
-    id.pb(i);
-    // cout<<i<<" ";
-    st.insert(b[i-1]);
-    for(auto it=v[i].begin();it!=v[i].end();it++)
-    {
-        if(mark[*it]==0)
-            dfs(v,*it,mark,st,b,id);
-    }    
-}
-
 
 void solve()
 {
@@ -124,26 +111,51 @@ void solve()
     vector<vector<pair<int,int>>> t ;
     t.resize(n,vector<pair<int,int>>(n,make_pair(0,0)));
 
-
-    if(a[n-1][n-1]=='#'){
+//initialisation
+    if(a[n-1][n-1]=='.'){
         t[n-1][n-1].first=1;
         t[n-1][n-1].second=1;
     }
     for(int j=n-2;j>=0;j--){
-        if(a[n-1][j]!='#' && t[n-1][j+1].second==0){
-            t[n-1][j].second=0;
+        if(a[n-1][j]=='.' && t[n-1][j+1].second==1){
+            t[n-1][j].second=1;//right clear
+            t[n-1][j].first = 1;//below clear
         }
-        
+        if(a[n-1][j]=='.' && t[n-1][j+1].second==0){
+            t[n-1][j].first = 1;//below clear
+        }
     }
 
-    for(int i=n-1;i>=0;i--){
-        for(int j=n-1;j>=0;j--){
-            if(a[i][j]=='.'){
-                if(a[i+1][j]=='#')t[i][j].first=1;
+    for(int i=n-2;i>=0;i--){
+        if(a[i][n-1]=='.' && t[i+1][n-1].first==1){
+            t[i][n-1].second=1;//right clear
+            t[i][n-1].first = 1;//neeche se jaa sakti
+        }
+        if(a[i][n-1]=='.' && t[i+1][n-1].first==0){
+            t[i][n-1].second = 1;//right is clear
+        }
+    }
+//inner t matrix calculations
+    for(int i=n-2;i>=0;i--){
+        for(int j=n-2;j>=0;j--){
+            if(a[i][j]=='.' && t[i+1][j].first==1){
+                t[i][j].first=1;
+            }
+            if(a[i][j]=='.' && t[i][j+1].second==1){
+                t[i][j].second=1;
             }
         }
     }
 
+    int count =0;
+    for(int i=0;i<=n;i++){
+        for(int j=0;j<n;j++){
+            if(t[i][j].first==1 && t[i][j].second==1){
+                count +=1;
+            }
+        }
+    }
+    cout << count <<"\n";
 }
     
 int main()
