@@ -1,5 +1,5 @@
 # Welcome !!
-This repo has Descriptive solutions to the Data Structures and Algorithms problems in Codechef CCDSAP/prepare section. Because not all the problems have explaination, this will surely help. The problems can be found here -  https://www.codechef.com/certification/data-structures-and-algorithms/prepare .
+{W.I.P} This repo has Descriptive solutions to the Data Structures and Algorithms problems in Codechef CCDSAP/prepare section. Because not all the problems have explaination, this will surely help. The problems can be found here -  https://www.codechef.com/certification/data-structures-and-algorithms/prepare .
 ### Notice-
 - All the codes are in C++.
 - All the codes have been tested to run on all the test cases.
